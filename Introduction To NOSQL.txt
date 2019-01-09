@@ -1,0 +1,49 @@
+INTRODUCTION OF NOSQL DATA BASE:
+
+OVERVIEW OF DATA BASE:
+Mongo DB is open source management system that uses DOCUMENT-ORIENTED DATA MODEL:
+1.Everything will be interms of Documents
+2.each DB has collection, collection is a group of documents(similar topic)
+3.collections are similar to tables from the relational model...
+4.Document is composed of field and values
+5.Documents are stored as JSON Format(JavaScript Object Notation) 
+  **Mongo DB actaually stores the JSON documents in a binary-encoded format called BSON
+  **BSON extends JSON throught supporting additional data types and to be efficient for 
+    encoding and decoding within diffierent languages.
+  
+  **Browser takes only Java script object
+  **Server can understand only JSON format
+  
+  **JSON is a light weight data exchange format b/w server and brower
+  **JS object gets converted to JSON using 
+    JSON.STRINGIFY(OBJECT)
+  **converting any JSON received into JavaScript Object using 
+    JSON.PARSE(JSON)
+  **JSON is language Independent.
+
+6.Mongodb consider a Nosql(Not only structured query language)
+7.Mongodb don't use relational model(RDBMS), therefore doesn't use SQL as it's 
+  query language. 
+8.Document-Oriented Model:
+  **enables mongodb to store semi-structured data which doesn't require a fixed schema
+  **It can achieve this through the use of JSON Document.
+  
+ADVANTAGE OF NOSQL DB:
+1.We can store large data
+2.High avaliablility(replica set) and scalability(handling many requests)
+3.Horizontal scaling(servers increase--adding multiple servers)
+4.No RDMS thereby increasing  the spead
+5.Document Object Model made useable and flexiable
+6.Rich Query Language(query complexity will be reduced)
+
+Type of Nosql db:
+1.Mongo db
+2.Cassandera
+3.BigTable
+4.Raven Db
+5.Redis
+6.Neo4J
+7.Couch Db
+8.Hbase
+	
+	
