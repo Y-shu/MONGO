@@ -1,0 +1,111 @@
+MONGODB FUNDAMENTALS:
+1.Schema:Creation of organised structure in an organised way
+2.In MONGODB to design schema we use MONGOOSE.
+3.Each JSON document that we entered into collection can contain its own structure
+  therefore no fixed schema that limits the type of data that can be entered into a 
+  mongo db
+4.Accessing Mongodb can be possible in two ways:
+  **One is MongoShell
+  **one is programming environment using mongodb driver
+  
+  mongod command used to start Mongodb instances 
+  **d stands for demon process it is a long running back ground process that answers 
+    request for services.
+  mongo(linux) or mongo.exe(windows)-->to connect to our running mongodb instances.
+5.MongoShell is an interactive javascript interface to mongodb, it included in the mongodb 
+  package
+6.Creating Data Base:
+  to create database in mongodb simply switch to an non-existent database
+  to switch database run USE 
+  
+  use database_name
+7.Create a collection 
+  or else db can not be there once shell is closed
+8.Creating a Collection:
+  
+  **db.collection_name.insert({field:name});
+  
+  **db.createCollection("CollectionName");
+9.CAPPED COLLECTIONS:
+  A capped collection is a fixed sized collection that automatically over writes its oldest
+  entities when it reaches its maximum size.
+  
+  db.createCollection( "log", { capped: true, size: 100000 } )
+
+  db.createCollection("log", { capped : true, size : 5242880, max : 5000 } )
+  
+  **we may also specify a maximum number of documents for the collection using the 
+    max field 
+10.Creating a Document:
+   
+   Three methods for inserting document into database:
+   insert()
+   insertOne()
+   insertMany()
+   
+   db.createCollection.insert({});
+   db.createCollection.insertOne({});
+   db.createCollection.insertMany([{},{},.........]);
+   db.masha.insertMany([
+   {name:"yashu"},
+   {name:"kittu"},
+   {name:"vishu"},
+   {name:"asish"},
+   {name:"ram"}
+   ]);
+   
+   **difference between insert and insertOne is that insertOne will provide us with 
+   acknowledged and objectId where as insert gives us only the write concern
+
+11.OBJECT ID
+   The ObjectId class is the default primary key for a MongoDB document and is 
+   usually found in the _id field in an inserted document. Let’s look at an example.
+
+  {
+    "_id": ObjectId("54759eb3c090d83494e2d804")
+  }
+An ObjectId is a 12 byte binary BSON type that contain any 12 bytes you want. 
+To be helpful in generating ObjectIds MongoDB drivers and the server will 
+generate them using a default Algorithm. A ObjectId’s 12 bytes will be then 
+contain the following.
+
+Size	Description
+4 bytes	a 4-byte value representing the seconds since the Unix epoch
+3 bytes	a 3-byte machine identifier
+2 bytes	2-byte process id
+3 bytes	3-byte counter, starting with a random value
+
+12.WriteConcern:
+   A WriteConcern describe the level of a acknowledgement requested from Mongodb for write
+   operation to a standalone mongod or replica set or sharded cluster
+   
+13.START OR STOP MONGODB SERVICES:(LINUX)
+    
+	sudo systemctl status mongod service
+	sudo systemctl start mongod service
+	sudo systemctl restart mongod service
+	sudo systemctl stop mongod service
+	
+	[OR]
+	
+	sudo service mongod start
+	sudo service mongod status
+	sudo service mongod stop
+	sudo service mongod restart
+
+14.STATIC AND DYNAMIC SCHEMA:
+   In short, Static Schema is a fixed schema configured when creating the workspace;
+   Dynamic Schema is a schema which would be dynamically configured at run-time based
+   on a resource (schema of the source dataset in many cases).
+   
+   MongoDB provides a document data model that lets you store and combine any type of 
+   data while also offering sophisticated data access and rich indexing features. 
+   With MongoDB, you don’t have to reinvent the wheel every time your business 
+   requirements change or evolve over time.
+   
+   MongoDB’s follows dynamic schema
+   
+   
+
+	
+   
