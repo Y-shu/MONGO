@@ -1,0 +1,62 @@
+USER RELATED OPERATIONS:
+
+1.USER MANAGEMENT INTERFACE
+  To add a user, MongoDB provides the db.createUser() method.
+  When adding a user, you can assign roles to the user in order to grant privileges.
+  **The first user created in the database should be a user administrator who has the
+  privileges to manage other users.
+  
+2.AUTHENTICATION DATABASE
+  When adding a user, you create the user in a specific database. This database 
+  is the authentication database for the user.
+  
+  A user can have privileges across different databases; that is, a user’s 
+  privileges are not limited to their authentication database.
+  
+3.AUTHENTICATE A USER
+  To authenticate as a user, you must provide a username, password, and the 
+  authentication database associated with that user.
+  
+  To authenticate using the mongo shell, either:
+
+   Use the mongo command-line authentication options 
+   (--username, --password, and --authenticationDatabase)
+   when connecting to the mongod or mongos instance, or
+
+   Connect first to the mongod or mongos instance, and then
+   run the authenticate command or the db.auth() method 
+   against the authentication database.
+   
+4.CENTRALIZED USER DATA
+  
+  MongoDB stores all user information, including name, password, 
+  and the user's authentication database,in the SYSTEM.USERS 
+  COLLECTION IN THE ADMIN DATABASE.
+  **Do not access this collection directly but instead use the user management commands.
+  
+5.Sharded Cluster Users
+   Shard means replica sets(for high avaliablility)
+
+  To create users for a sharded cluster, 
+  connect to the mongos instance and add the users. 
+  Clients then authenticate these users through the mongos instances.
+  
+  To create a shard local administrative user,
+  connect directly to the shard and create 
+  the user.MongoDB stores shard local users in the admin database of the shard itself.
+
+ These shard local users are completely independent from the users added to the sharded
+ cluster via mongos. Shard local users are local to the shard and are inaccessible by 
+ mongos.
+
+ Direct connections to a shard should only be for shard-specific maintenance and 
+ configuration. In general, clients should connect to the sharded cluster through
+ the mongos.
+ 
+6.Local Host exceptions:
+The localhost exception allows you to enable access control and then create the first 
+user in the system. With the localhost exception, after you enable access control, 
+connect to the localhost interface and create the first user in the admin database.
+The first user must have privileges to create other users, such as a user with the 
+userAdmin or userAdminAnyDatabase role.
+  
