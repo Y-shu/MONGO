@@ -19,6 +19,9 @@ MONGODB FUNDAMENTALS:
   to switch database run USE 
   
   use database_name
+  
+  deleting database:
+  db.dropDatabase();
 7.Create a collection 
   or else db can not be there once shell is closed
 8.Creating a Collection:
