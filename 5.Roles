@@ -1,0 +1,146 @@
+ROLES:
+
+what is a Role:
+Role is something which provide some set of previliges to particular user.
+OR
+A role grants privileges to perform the specified actions on resource.
+Each privilege is either specified explicitly in the role or inherited from another role or both.
+
+Role Based Access Control:
+1.Mongodb follows Role Based Access Control to have an access to MongoDb System.
+2.A user is granted with one or more roles that determine the user's access to data base
+  resource and operations.
+3.Outside of role assignment, user will not a have access to system.
+4.Mongo db does not enable access control by default. we can enable authorization using the 
+  --auth or the security.authorization settings.
+5.we can see the previliges of a particular role using:
+  roleInfo command
+  
+  showPrivileges
+  and 
+  showBuiltInRoles
+  
+  and set both to true
+  
+  db.runCommand(
+    {
+      rolesInfo: { role: "readWrite", db: "practise" },
+      showPrivileges: true
+    }
+)
+
+6.BUILT IN ROLES:
+  1.Mongodb provides access to data and commands through role-based authorization.
+  2.and provides built-in roles that provides different levels of access commonly 
+  3.we can create user defined roles.
+  4.A role grants previliges to perform set of actions on set of resources.
+  5.Data base user roles:
+    
+	Every db has following client roles:
+	read:
+	Provides the ability to read data on all non-system collections and on the following 
+	system collections: 
+	system.indexes, system.js, and system.namespaces collections.
+	
+	
+	MongoDB stores system information in collections that use the <database>.system.* 
+	namespace, which MongoDB reserves for internal use. Do not create collections that 
+	begin with system.
+	
+	readWrite:
+    Provides all the privileges of the read role plus ability to modify data on all non-system
+    collections and the system.js(system collection) collection.
+	
+  6.DataBase Adminstration Role:
+    
+	dbAdmin:
+	Provides the ability to perform administrative tasks such as schema-related tasks,
+	indexing,and gathering statistics.This role does not grant privileges for user 
+	and role management.
+	
+	dbOwner:
+	can perform any administrative action on database.
+	this role combines 
+	readWrite , dbAdmin and userAdmin Previleges
+	
+	userAdmin:
+	ability to create and modifies roles and users on the current database
+	since user admin role allows users to grant any previliges to any user, inculding
+	themselves, the role also indirectly provides superuser access to either the db.
+	
+ 7.Cluster Adminstration Role:
+   admin data base have this role for administracting the whole system...than a single db
+   
+   clusterAdmin:
+   Provides the greatest cluster-management access. This role combines the privileges 
+   granted by the clusterManager, clusterMonitor, and hostManager roles. Additionally, 
+   the role provides the dropDatabase action.
+   
+   clusterManager:
+   Provides management and monitoring actions on the cluster. A user with this role 
+   can access the config and local databases, which are used in sharding and replication,
+   respectively.
+   
+   clusterMonitor:
+   Provides read-only access to monitoring tools such as mongodb cloud manager and ops 
+   manager monitoring agent
+   
+   hostManager:
+   Provides the ability to monitor and manage servers.
+   
+8.Backup and Restoration Roles:
+  The admin database includes the following roles for backing up and restoring data:
+  
+  backup:
+  provides minimal privilege for backing up data.
+  this roles grants permission to have access to 
+     *Mongodb cloud manager back up agent
+	 *Ops Manager back up agent
+	 * and to use mongodump to back up an entire mongod entire mongod instance.
+  restore:
+  Provides privileges needed to restore data from backups that do not include
+  system.profile collection data.
+  
+9.All DataBase Roles:
+  The following roles are available on the admin database and provide privileges 
+  which apply to all databases except local and config:
+	
+	readAnyDatabase:
+	provides read-only privileges as read on all dbs except loacl and config dbs.
+	
+	readWriteAnyDatabase:
+	provides readWrite privileges as readWrite on all dbs except local and config.
+	
+	userAdminAnyDatabase:
+	provides same access to user administration operations as userAdmin on all dbs except
+	local and config.
+	
+	dbAdminAnyDatabase:
+	Provides the same privileges as dbAdmin on all databases except local and config. 
+	The role also provides the listDatabases action on the cluster as a whole.
+	
+10.SuperUser Role:
+   Several roles provide either indirect or direct system-wide superuser access.
+   
+   dbOwner
+   userAdmin
+   userAdminAnyDatabase
+   
+   the above roles provide the ability to assign any user any privilege on any database,
+   which means that users with one above role can assign themselves any privilege on any
+   database.
+   
+   root:
+   Provides access to the operations and all the resources of the readWriteAnyDatabase,
+   dbAdminAnyDatabase,userAdminAnyDatabase,clusterAdmin,restore and backup combined.
+   
+11.Internal Role:
+   
+   system:
+   MongoDB assigns this role to user objects that represent cluster members, such as
+   replica set members and mongos instances. The role entitles its holder to take any 
+   action against any object in the database.
+   
+   **Therefore, a role is a privilege granted to a user to do specific tasks with specific resources.
+
+     Resources ← Actions ← Roles (Privileges) → Users 
