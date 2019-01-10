@@ -1,0 +1,79 @@
+MONGODB AUTHENTICATION/AUTHORIZATION:
+
+#ENABLE AUTH:
+
+Start MongoDB without access control.
+
+mongo --port 27017 --dbpath 
+mongo --port 27017 --dbpath dbname
+
+Connect to the instance.
+
+mongo --port 27017 
+
+Create the user administrator
+
+use admin
+db.createUser(
+  {
+    user: "myUserAdmin",
+    pwd: "abc123",
+    roles: [ { role: "userAdminAnyDatabase", db: "admin" }, "readWriteAnyDatabase" ]
+  }
+)
+
+disconnect mongo shell
+
+
+Re-start the MongoDB instance with access control
+
+mongod --auth --port 27017 --dbpath /data/db1
+
+
+Connect and authenticate as the user administrator.
+
+mongo --port 27017 -u "userName" -p "password" --authenticationDatabase "admin"
+
+Switch to the authentication database (in this case, admin), and use 
+db.auth(<username>, <pwd>)method to authenticate:
+
+use admin
+db.auth("userName", "password" )
+
+**CREATE AND MANAGE USERS:
+  
+  use practise
+  switched to practise
+  
+  db.createUser({
+  user:"yashu",
+  pwd:"yashu",
+  roles:[
+  {role:"readWrite",db:"practise"},
+  {role:"read",db:"practise"}
+  ]
+  });
+  
+  **Roles grant users access to MongoDB resources.
+  **MongoDB provides a number of built-in roles that 
+  administrators can use to control access to a MongoDB system.
+  ** to create a new role to user:
+  
+     db.createRole();
+	 
+	 use admin
+db.createRole(
+   {
+     role: "dropSystemViewsAnyDatabase",
+     privileges: [
+       {
+         actions: [ "dropCollection" ],
+         resource: { db: "", collection: "system.views" }
+       }
+     ],
+     roles: []
+   }
+)
+
+
+
